@@ -20,9 +20,11 @@ if(isset($_POST['submit']))
 
     $listings=$search->fetchAll(PDO::FETCH_OBJ);
 
+
+
 }
 else{
-    header("locatio: ".APPURL."");
+    header("location: ".APPURL."");
 }
 
 
@@ -67,9 +69,9 @@ else{
             <div class="select-wrap">
               <span class="icon icon-arrow_drop_down"></span>
               <select name="types" id="list-types" class="form-control d-block rounded-0">
-                <option value="">Condo</option>
-                <option value="">Commercial Building</option>
-                <option value="">Land Property</option>
+                <option value="condo">Condo</option>
+                <option value="commercial building">Commercial Building</option>
+                <option value="land property">Land Property</option>
               </select>
             </div>
           </div>
@@ -78,9 +80,9 @@ else{
             <div class="select-wrap">
               <span class="icon icon-arrow_drop_down"></span>
               <select name="offers" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">sale</option>
-                <option value="">rent</option>
-                <option value="">lease</option>
+                <option value="sale">sale</option>
+                <option value="rent">rent</option>
+                <option value="lease">lease</option>
               </select>
             </div>
           </div>
@@ -89,11 +91,11 @@ else{
             <div class="select-wrap">
               <span class="icon icon-arrow_drop_down"></span>
               <select name="cities" id="select-city" class="form-control d-block rounded-0">
-                <option value="">New York</option>
-                <option value="">Brooklyn</option>
-                <option value="">London</option>
-                <option value="">Japan</option>
-                <option value="">Philippines</option>
+                <option value="new york">New York</option>
+                <option value="brooklyn">Brooklyn</option>
+                <option value="london">London</option>
+                <option value="japan">Japan</option>
+                <option value="philippines">Philippines</option>
               </select>
             </div>
           </div>
@@ -104,34 +106,7 @@ else{
       </form>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
-          <div class="mr-auto">
-            <a href="index.html" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-            <a href="view-list.html" class="icon-view view-list"><span class="icon-view_list"></span></a>
-
-          </div>
-          <div class="ml-auto d-flex align-items-center">
-            <div>
-              <a href="#" class="view-list px-3 border-right active">All</a>
-              <a href="#" class="view-list px-3 border-right">Rent</a>
-              <a href="#" class="view-list px-3">Sale</a>
-            </div>
-
-
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select class="form-control form-control-sm d-block rounded-0">
-                <option value="">Sort by</option>
-                <option value="">Price Ascending</option>
-                <option value="">Price Descending</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
   </div>
 </div>
@@ -144,14 +119,14 @@ else{
         <?php foreach($listings as $listing) : ?>
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="property-entry h-100">
-          <a href="property-details.html" class="property-thumbnail">
+          <a href="property-details.php?id=<?php echo $listing->id; ?>" class="property-thumbnail">
             <div class="offer-type-wrap">
               <span class="offer-type bg-<?php if($listing->type == "rent"){echo "success";} else {echo "danger";}?>"><?php echo $listing->type; ?></span>
             </div>
             <img src="images/<?php echo $listing->image; ?>" alt="Image" class="img-fluid">
           </a>
           <div class="p-4 property-body">
-            <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+            
             <h2 class="property-title"><a href="property-details.php?id=<?php echo $listing->id; ?>"><?php echo $listing->name; ?></a></h2>
             <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> <?php echo $listing->location; ?></span>
             <strong class="property-price text-primary mb-3 d-block text-success">$<?php echo $listing->price; ?></strong>
